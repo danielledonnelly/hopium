@@ -1,0 +1,126 @@
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.game-container:active {
+  cursor: grabbing;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
+.character-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 300px;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+.xray-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.character-xray-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: auto;
+  /* Use the xray image as a mask */
+  mask-image: url('/assets/xray.png');
+  mask-size: 250px auto; /* Make mask bigger than the 200px wand */
+  mask-repeat: no-repeat;
+  mask-position: 0px 0px;
+  -webkit-mask-image: url('/assets/xray.png');
+  -webkit-mask-size: 250px auto; /* Make mask bigger than the 200px wand */
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 0px 0px;
+  /* Make it completely transparent by default */
+  opacity: 0;
+  /* Only show through the mask */
+  mix-blend-mode: normal;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+.xray-mask {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.xray-image {
+  width: 200px;
+  height: auto;
+  pointer-events: auto;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+.xray-image:active {
+  cursor: grabbing;
+}
+
+/* Show the x-ray image when mask is applied */
+.character-xray-image {
+  opacity: 1;
+}
+
+/* Ensure the game container takes full viewport */
+body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
