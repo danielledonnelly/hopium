@@ -10,13 +10,6 @@ function App() {
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const xrayRef = useRef(null)
-  
-  // Calculate mask position relative to the character
-  const characterCenter = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
-  const maskPosition = {
-    x: xrayPosition.x - characterCenter.x + 150 - 25, // Move mask left by 25px to center it
-    y: xrayPosition.y - characterCenter.y + 150 + 25 // Move mask down by 25px to be just below the wand
-  }
 
   const handleMouseDown = (e) => {
     const rect = xrayRef.current.getBoundingClientRect()
@@ -68,34 +61,30 @@ function App() {
         className="character-image"
       />
       
-      {/* Character (Flick) - X-ray version */}
-      <div className="xray-container">
-        <img 
-          src={flickXrayImage} 
-          alt="Flick X-ray" 
-          className="character-xray-image"
-          style={{
-            maskPosition: `${maskPosition.x}px ${maskPosition.y}px`,
-            WebkitMaskPosition: `${maskPosition.x}px ${maskPosition.y}px`
-          }}
-        />
-        <div 
-          className="xray-mask"
-          style={{
-            left: xrayPosition.x,
-            top: xrayPosition.y
-          }}
-        >
-          <img 
-            src={xrayImage} 
-            alt="X-ray" 
-            className="xray-image"
-            ref={xrayRef}
-            onMouseDown={handleMouseDown}
-            draggable={false}
-          />
-        </div>
-      </div>
+      {/* Character (Flick) - X-ray version with xray mask */}
+      <img 
+        src={flickXrayImage} 
+        alt="Flick X-ray" 
+        className="character-xray-image"
+        style={{
+          maskPosition: `${xrayPosition.x - 280}px ${xrayPosition.y - 120}px`,
+          WebkitMaskPosition: `${xrayPosition.x - 280}px ${xrayPosition.y - 120}px`
+        }}
+      />
+      
+      {/* Draggable X-ray */}
+      <img 
+        src={xrayImage} 
+        alt="X-ray" 
+        className="xray-image"
+        style={{
+          left: xrayPosition.x,
+          top: xrayPosition.y
+        }}
+        ref={xrayRef}
+        onMouseDown={handleMouseDown}
+        draggable={false}
+      />
     </div>
   )
 }
