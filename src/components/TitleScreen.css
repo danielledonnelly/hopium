@@ -1,0 +1,46 @@
+.title-screen {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/assets/hopium_hospital.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.character-selection {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.character {
+  width: 400px;
+  height: 400px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.character:hover {
+  transform: scale(1.1);
+}
+
+.character.flick {
+  background-image: url('/assets/flick.png');
+}
+
+.character.muffy {
+  background-image: url('/assets/muffy.png');
+}
+
+.character.cap {
+  background-image: url('/assets/cap.png');
+} 
