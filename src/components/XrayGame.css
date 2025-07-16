@@ -114,6 +114,45 @@
   border-color: rgba(255, 255, 255, 0.6);
 }
 
+.ui-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.back-button,
+.diagnose-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+.back-button:hover,
+.diagnose-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.diagnose-button {
+  background: var(--hopium-yellow);
+  color: var(--hopium-brown);
+}
+
+.diagnose-button:hover {
+  background: var(--hopium-peach);
+  color: var(--hopium-brown);
+}
+
 /* Ensure the game container takes full viewport */
 body, #root {
   margin: 0;
