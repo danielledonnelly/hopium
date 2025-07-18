@@ -66,12 +66,12 @@ const muffyQuestions = [
       { speaker: 'Doc', text: 'What kinds of food do you cook?' },
       { speaker: 'Muffy', text: 'cloud bread, frozen honey, hot girl salad' },
       { speaker: 'Doc', text: 'None of those foods involve cooking.' },
-      { speaker: 'Doc', text: 'Also pretty sure you made those all up' },
+      { speaker: 'Doc', text: 'Also pretty sure you made those all up.' },
       { speaker: 'Muffy', text: 'haha ok' },
     ],
   },
   {
-    question: 'What are xome of your hobbies?',
+    question: 'What are some of your hobbies?',
     answer: [
       { speaker: 'Muffy', text: 'huh?' },
       { speaker: 'Doc', text: 'What do you do in your free time?' },
