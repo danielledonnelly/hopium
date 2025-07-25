@@ -1,3 +1,15 @@
+:root {
+  --hopium-brown: #703627;
+  --hopium-light-brown: #b37164;
+  --hopium-tan: #c58d72;
+  --hopium-peach: #dba682;
+  --hopium-pink: #df9882;
+  --hopium-olive: #8c7259;
+  --hopium-beige: #b7a18b;
+  --hopium-cream: #feeddc;
+  --hopium-yellow: #fcbd78;
+}
+
 .game-container {
   position: relative;
   width: 100vw;
@@ -120,11 +132,13 @@
   left: 20px;
   display: flex;
   gap: 20px;
-  z-index: 10;
+  z-index: 30;
 }
 
 .back-button,
-.diagnose-button {
+.diagnose-button,
+.prep-hopium-button,
+.back-diagnosis-button {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
@@ -137,7 +151,9 @@
 }
 
 .back-button:hover,
-.diagnose-button:hover {
+.diagnose-button:hover,
+.prep-hopium-button:hover,
+.back-diagnosis-button:hover {
   background: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -151,6 +167,111 @@
 .diagnose-button:hover {
   background: var(--hopium-peach);
   color: var(--hopium-brown);
+}
+
+.prep-hopium-button {
+  background: rgba(255, 193, 7, 0.9);
+  color: #333;
+}
+
+.prep-hopium-button:hover {
+  background: rgba(255, 193, 7, 1);
+}
+
+/* Diagnosis overlay styles */
+.diagnosis-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 40px;
+  pointer-events: none;
+}
+
+.diagnosis-textbox {
+  min-width: 620px;
+  max-width: 90vw;
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  padding: 24px 32px;
+  font-size: 1.25rem;
+  color: #222;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+
+
+.patient-name {
+  font-weight: bold;
+  color: var(--hopium-brown);
+  margin-right: 8px;
+  font-size: 1.3rem;
+}
+
+.patient-dialogue {
+  font-size: 1.15rem;
+  color: var(--hopium-light-brown);
+}
+
+.diagnosis-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.diagnosis-title {
+  font-weight: bold;
+  color: var(--hopium-brown);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.diagnosis-btn {
+  background: var(--hopium-cream);
+  color: var(--hopium-brown);
+  border: 1px solid var(--hopium-beige);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.diagnosis-btn:hover,
+.diagnosis-btn:focus {
+  background: var(--hopium-yellow);
+  color: var(--hopium-brown);
+  outline: none;
+}
+
+.diagnosis-btn:disabled {
+  background: var(--hopium-cream);
+  color: var(--hopium-brown);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.diagnosis-dialogue {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* Ensure the game container takes full viewport */

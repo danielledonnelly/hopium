@@ -82,6 +82,8 @@ const muffyQuestions = [
   },
 ];
 
+
+
 const getCharacterImage = (selectedCharacter) => {
   switch (selectedCharacter) {
     case 'flick':
@@ -138,6 +140,7 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
   const [currentQA, setCurrentQA] = useState(null);
   const [qaLineIndex, setQaLineIndex] = useState(0);
 
+
   const handleInterview = () => {
     setShowTextbox(true);
     setDialogueIndex(0);
@@ -145,6 +148,7 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
     setAskedQuestions([]);
     setCurrentQA(null);
     setQaLineIndex(0);
+
   };
 
   const handleNextDialogue = () => {
@@ -174,6 +178,8 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
       }
     }
   };
+
+
 
   // Handler for clicking the dialogue bar
   const handleTextboxClick = () => {
@@ -208,6 +214,7 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
           <button className="interview-button" onClick={handleInterview}>
             Interview Patient
           </button>
+
           <button className="xray-button" onClick={onStartXray}>
             Start X-Ray →
           </button>
@@ -240,7 +247,9 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
                   </button>
                 ))}
                 {askedQuestions.length === characterQuestions.length && (
-                  <div className="all-asked">That's everything. Start the scan.</div>
+                  <div className="diagnosis-section">
+                    <div className="all-asked">That's everything. Start the scan.</div>
+                  </div>
                 )}
               </div>
             )}

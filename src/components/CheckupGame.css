@@ -56,7 +56,8 @@
 
 .back-button,
 .xray-button,
-.interview-button {
+.interview-button,
+.prep-hopium-button {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
@@ -70,7 +71,8 @@
 
 .back-button:hover,
 .xray-button:hover,
-.interview-button:hover {
+.interview-button:hover,
+.prep-hopium-button:hover {
   background: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -78,7 +80,8 @@
 
 .back-button:focus,
 .xray-button:focus,
-.interview-button:focus {
+.interview-button:focus,
+.prep-hopium-button:focus {
   outline: none;
 }
 
@@ -89,6 +92,15 @@
 
 .xray-button:hover {
   background: rgba(0, 123, 255, 1);
+}
+
+.prep-hopium-button {
+  background: rgba(255, 193, 7, 0.9);
+  color: #333;
+}
+
+.prep-hopium-button:hover {
+  background: rgba(255, 193, 7, 1);
 }
 
 .patient-textbox {
@@ -167,6 +179,74 @@
   color: var(--hopium-brown);
   margin-top: 8px;
   font-style: normal;
+}
+
+.diagnosis-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.diagnose-button {
+  background: var(--hopium-yellow);
+  color: var(--hopium-brown);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.diagnose-button:hover, .diagnose-button:focus {
+  background: var(--hopium-peach);
+  color: var(--hopium-brown);
+  outline: none;
+}
+
+.diagnosis-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.diagnosis-title {
+  font-weight: bold;
+  color: var(--hopium-brown);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.diagnosis-btn {
+  background: var(--hopium-cream);
+  color: var(--hopium-brown);
+  border: 1px solid var(--hopium-beige);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.diagnosis-btn:hover,
+.diagnosis-btn:focus {
+  background: var(--hopium-yellow);
+  color: var(--hopium-brown);
+  outline: none;
+}
+
+.diagnosis-dialogue {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .proceed-xray-btn {

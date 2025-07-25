@@ -44,7 +44,7 @@ function App() {
           onBack={handleBackToCheckup}
         />
       )}
-    </div>
+      </div>
   );
 }
 
