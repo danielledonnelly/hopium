@@ -182,6 +182,96 @@
   background: rgba(255, 193, 7, 1);
 }
 
+/* Brewing ingredients */
+.brewing-ingredients {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 40px;
+  z-index: 15;
+}
+
+.ingredient-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 180px;
+  height: 180px;
+}
+
+.brewing-ingredient {
+  width: 160px;
+  height: 160px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.ingredient-container:hover .brewing-ingredient {
+  transform: scale(1.1);
+}
+
+.ingredient-container:hover .ingredient-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brewing-ingredient:active {
+  cursor: grabbing;
+}
+
+.ingredient-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #77b1c3;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-transform: capitalize;
+}
+
+/* Brewing beaker */
+.brewing-beaker {
+  position: absolute;
+  bottom: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 180px;
+  z-index: 15;
+  transition: all 0.2s ease;
+}
+
+.brewing-beaker:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+.beaker-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.beaker-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
 /* Diagnosis overlay styles */
 .diagnosis-overlay {
   position: absolute;
@@ -215,8 +305,6 @@
   -moz-user-select: none;
   -ms-user-select: none;
 }
-
-
 
 .patient-name {
   font-weight: bold;
@@ -278,6 +366,49 @@
   gap: 8px;
 }
 
+.brewing-dialogue {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.brewing-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.brewing-result-display {
+  position: absolute;
+  bottom: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+}
+
+.result-image {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.back-to-title-button {
+  background: var(--hopium-brown);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-to-title-button:hover {
+  background: var(--hopium-dark-brown);
+}
+
 /* Ensure the game container takes full viewport */
 body, #root {
   margin: 0;
@@ -289,4 +420,15 @@ body, #root {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+.brewing-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 12;
+  pointer-events: none;
 } 

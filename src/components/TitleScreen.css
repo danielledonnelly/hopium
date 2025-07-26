@@ -43,4 +43,8 @@
 
 .character.cap {
   background-image: url('/assets/cap.png');
+}
+
+.character.flick.dancing {
+  /* Animation handled by JavaScript */
 } 
