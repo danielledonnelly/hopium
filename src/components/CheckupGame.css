@@ -86,12 +86,12 @@
 }
 
 .xray-button {
-  background: rgba(0, 123, 255, 0.9);
+  background: #77b1c3;
   color: white;
 }
 
 .xray-button:hover {
-  background: rgba(0, 123, 255, 1);
+  background: #77b1c3;
 }
 
 .prep-hopium-button {

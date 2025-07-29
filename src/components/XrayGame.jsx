@@ -67,7 +67,7 @@ const muffyDiagnoses = [
       { speaker: 'Doc', text: "You have brainrot." },
       { speaker: 'Doc', text: "Too much time online has rotted your mind." },
       { speaker: 'Doc', text: "You go through life sedated, barely conscious." },
-      { speaker: 'Doc', text: "Because consuing media online is all you do all day." },
+      { speaker: 'Doc', text: "Because consuming media online is all you do all day." },
       { speaker: 'Muffy', text: "🆗" },
       { speaker: 'Doc', text: "You need to get off your phone." },
       { speaker: 'Muffy', text: "can't" },
@@ -190,15 +190,15 @@ const muffyHopiumSuccessDialogue = [
   { speaker: 'Doc', text: 'You sound different.' },
   { speaker: 'Muffy', text: 'Oh.' },
   { speaker: 'Muffy', text: 'I just realized.' },
-  { speaker: 'Muffy', text: 'All the random stuff I argue about online is meaningless.' },
-  { speaker: 'Muffy', text: 'I can just log off and choose not to engage!' },
+  { speaker: 'Muffy', text: 'All the stuff I seethe about online is stupid.' },
+  { speaker: 'Muffy', text: 'I can just log off and disengage.' },
   { speaker: 'Doc', text: 'Yeah, you can.' },
   { speaker: 'Muffy', text: 'I\'m gonna do that!' },
   { speaker: 'Muffy', text: 'I\'m gonna do a little dance.' },
   { speaker: 'Muffy', text: 'And then I\'m gonna touch a little grass.' },
-  { speaker: 'Doc', text: 'Good for you' },
-  { speaker: 'Muffy', text: 'Thanks Doc! You\'re a real one' },
-  { speaker: 'Doc', text: 'I guess I should go and check on the next patient' },
+  { speaker: 'Doc', text: 'Good for you.' },
+  { speaker: 'Muffy', text: 'Thanks Doc! You\'re a real one.' },
+  { speaker: 'Doc', text: 'I guess I should go and check on the next patient.' },
 ];
 
 const capHopiumSuccessDialogue = [
@@ -259,7 +259,7 @@ const getCharacterName = (selectedCharacter) => {
   }
 };
 
-const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDancingFlick, onBackToTitleWithDancingMuffy, onBackToTitleWithDancingCap }) => {
+const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDancingFlick, onBackToTitleWithDancingMuffy, onBackToTitleWithDancingCap, backgroundImage, onPatientCured }) => {
   const [xrayPosition, setXrayPosition] = useState({ x: 100, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -441,11 +441,11 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
         if (hopiumDialogueIndex === 3) { // When "Mental health is complicated and messy, y'know" appears
           // Character will change to flick-switch.png in the render
         } else if (hopiumDialogueIndex === 4) { // When "It takes more than a sip of some miracle drug to-" appears
-          // Character will change back to flick.png
+          onPatientCured('flick'); // Mark Flick as cured - background changes here
         } else if (hopiumDialogueIndex === 5) { // When "Wait! It's working!" appears
-          // Character will change to flick-hope-switch.png
+          // Character will change to flick-hope.png
         } else if (hopiumDialogueIndex === 6) { // When "The mean voice in my head, it's gone!" appears
-          setFlickFlickering(true); // Start the flickering
+          // Character will change to flick-switch.png
         } else if (hopiumDialogueIndex === 7) { // When "Oh." appears
           setFlickFlickering(false);
           setFlickDancing(true); // Start the dance animation
@@ -466,6 +466,11 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
     if (showMuffyHopiumSuccessDialogue) {
       if (muffyHopiumDialogueIndex < muffyHopiumSuccessDialogue.length - 1) {
         setMuffyHopiumDialogueIndex(muffyHopiumDialogueIndex + 1);
+        
+        // Mark Muffy as cured when she reaches her hope state
+        if (muffyHopiumDialogueIndex === 5) { // When she says "Oh."
+          onPatientCured('muffy');
+        }
       } else {
         // End the hopium sequence and return to title screen with Muffy dancing
         setShowMuffyHopiumSuccessDialogue(false);
@@ -478,6 +483,11 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
     if (showCapHopiumSuccessDialogue) {
       if (capHopiumDialogueIndex < capHopiumSuccessDialogue.length - 1) {
         setCapHopiumDialogueIndex(capHopiumDialogueIndex + 1);
+        
+        // Mark Cap as cured when he reaches his hope state
+        if (capHopiumDialogueIndex === 4) { // When he says "I do. Feel, I mean."
+          onPatientCured('cap');
+        }
       } else {
         // End the hopium sequence and return to title screen with Cap dancing
         setShowCapHopiumSuccessDialogue(false);
@@ -651,7 +661,7 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
     >
       {/* Background */}
       <img
-        src="/assets/background.png"
+        src={backgroundImage}
         alt="Background"
         className="background-image"
       />
@@ -663,15 +673,11 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
               ? '/assets/flick-switch.png'
               : hopiumDialogueIndex === 4
                 ? '/assets/flick.png'
-                : hopiumDialogueIndex === 5
-                  ? '/assets/flick-hope-switch.png'
-                  : hopiumDialogueIndex === 6
-                    ? flickFlickering
-                      ? (flickerFrame === 0 ? '/assets/flick-hope.png' : '/assets/flick-hope-switch.png')
-                      : '/assets/flick-hope-switch.png'
-                    : flickDancing
-                      ? (danceFrame === 0 ? '/assets/flick-hope.png' : '/assets/flick-hope-switch.png')
-                      : '/assets/flick-hope.png'
+                : hopiumDialogueIndex >= 5
+                  ? flickDancing
+                    ? '/assets/flick-dance.gif'
+                    : (hopiumDialogueIndex % 2 === 0 ? '/assets/flick-hope.png' : '/assets/flick-hope-switch.png')
+                  : '/assets/flick-hope.png'
             : selectedCharacter === 'muffy' && showMuffyHopiumSuccessDialogue && muffyHopiumDialogueIndex >= 3
               ? muffyHopiumDialogueIndex === 3
                 ? '/assets/muffy-switch.png'
@@ -683,11 +689,9 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
                       ? '/assets/muffy-hope.png'
                       : muffyHopiumDialogueIndex === 7
                         ? '/assets/muffy-hope-switch.png'
-                        : muffyHopiumDialogueIndex >= 8 && muffyHopiumDialogueIndex < 12
-                          ? (muffyHopiumDialogueIndex % 2 === 0 ? '/assets/muffy-hope.png' : '/assets/muffy-hope-switch.png')
-                                                                            : muffyHopiumDialogueIndex >= 12
-                            ? (muffyHopiumDialogueIndex % 2 === 0 ? '/assets/muffy-hope.png' : '/assets/muffy-hope-switch.png')
-                            : '/assets/muffy-hope-switch.png'
+                        : muffyHopiumDialogueIndex >= 8
+                          ? '/assets/muffy-dance.gif'
+                          : '/assets/muffy-hope-switch.png'
               : selectedCharacter === 'cap' && showCapHopiumSuccessDialogue && capHopiumDialogueIndex >= 2
                 ? capHopiumDialogueIndex === 2
                   ? '/assets/cap-switch.png'
@@ -701,9 +705,9 @@ const XrayGame = ({ selectedCharacter, onBack, onPrepHopium, onBackToTitleWithDa
                           ? '/assets/cap-hope.png'
                           : capHopiumDialogueIndex === 7
                             ? '/assets/cap-hope-switch.png'
-                            : capHopiumDialogueIndex >= 8
-                              ? (capHopiumDialogueIndex % 2 === 0 ? '/assets/cap-hope.png' : '/assets/cap-hope-switch.png')
-                              : '/assets/cap-hope-switch.png'
+                                                    : capHopiumDialogueIndex >= 8
+                          ? '/assets/cap-dance.gif'
+                          : '/assets/cap-hope-switch.png'
               : selectedCharacter === 'muffy' && showDiagnosis
                 ? characterImages.phone
                 : characterImages.regular

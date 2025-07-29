@@ -10,6 +10,7 @@ function App() {
   const [flickDancingInTitle, setFlickDancingInTitle] = useState(false);
   const [muffyDancingInTitle, setMuffyDancingInTitle] = useState(false);
   const [capDancingInTitle, setCapDancingInTitle] = useState(false);
+  const [curedPatients, setCuredPatients] = useState([]);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -56,6 +57,27 @@ function App() {
     setCapDancingInTitle(true);
   };
 
+  const handlePatientCured = (patientName) => {
+    if (!curedPatients.includes(patientName)) {
+      setCuredPatients(prev => [...prev, patientName]);
+    }
+  };
+
+  const getBackgroundImage = (isTitleScreen = false) => {
+    const curedCount = curedPatients.length;
+    const baseName = isTitleScreen ? 'hopium-hospital' : 'background';
+    
+    if (curedCount === 0) {
+      return isTitleScreen ? '/assets/hopium-hospital.png' : '/assets/background.png';
+    } else if (curedCount === 1) {
+      return `/assets/${baseName}-bright.png`;
+    } else if (curedCount === 2) {
+      return `/assets/${baseName}-brighter.png`;
+    } else {
+      return `/assets/${baseName}-brightest.png`;
+    }
+  };
+
   const handleStartXray = () => {
     setGameState('xray');
   };
@@ -73,15 +95,22 @@ function App() {
   return (
     <div className="App">
       {gameState === 'title' && (
-        <TitleScreen onSelectCharacter={handleCharacterSelect} flickDancingInTitle={flickDancingInTitle} muffyDancingInTitle={muffyDancingInTitle} capDancingInTitle={capDancingInTitle} />
-      )}
-      {gameState === 'checkup' && (
-        <CheckupGame 
-          selectedCharacter={selectedCharacter}
-          onBack={handleBackToTitle}
-          onStartXray={handleStartXray}
+        <TitleScreen 
+          onSelectCharacter={handleCharacterSelect} 
+          flickDancingInTitle={flickDancingInTitle} 
+          muffyDancingInTitle={muffyDancingInTitle} 
+          capDancingInTitle={capDancingInTitle}
+          backgroundImage={getBackgroundImage(true)}
         />
       )}
+              {gameState === 'checkup' && (
+          <CheckupGame 
+            selectedCharacter={selectedCharacter}
+            onBack={handleBackToTitle}
+            onStartXray={handleStartXray}
+            backgroundImage={getBackgroundImage(false)}
+          />
+        )}
       {gameState === 'xray' && (
         <XrayGame 
           selectedCharacter={selectedCharacter}
@@ -90,6 +119,8 @@ function App() {
           onBackToTitleWithDancingFlick={handleBackToTitleWithDancingFlick}
           onBackToTitleWithDancingMuffy={handleBackToTitleWithDancingMuffy}
           onBackToTitleWithDancingCap={handleBackToTitleWithDancingCap}
+          backgroundImage={getBackgroundImage(false)}
+          onPatientCured={handlePatientCured}
         />
       )}
     </div>

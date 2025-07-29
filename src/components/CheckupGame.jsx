@@ -82,6 +82,39 @@ const muffyQuestions = [
   },
 ];
 
+const capDialogue = [
+  { speaker: 'Cap', text: "Howdy, the name's Cap." },
+  { speaker: 'Cap', text: "I'm here cause there's something wrong with my brain." },
+  { speaker: 'Doc', text: 'I see. Let\'s go through some questions.' },
+];
+
+const capQuestions = [
+  {
+    question: 'Do you have any allergies?',
+    answer: [
+      { speaker: 'Cap', text: 'Yeah, pollen and grass.' },
+      { speaker: 'Cap', text: 'Both tend to trigger my allergies pretty bad.' },
+    ],
+  },
+  {
+    question: 'Are you often in pain?',
+    answer: [
+      { speaker: 'Cap', text: 'Define pain.' },
+      { speaker: 'Doc', text: "It's when you're hurting." },
+      { speaker: 'Cap', text: "I don't know." },
+      { speaker: 'Cap', text: "Sometimes I'm in pain." },
+      { speaker: 'Cap', text: "Other times I don't feel anything at all." },
+    ],
+  },
+  {
+    question: 'Do you ever want to die?',
+    answer: [
+      { speaker: 'Cap', text: 'Nah.' },
+      { speaker: 'Cap', text: "I just don't particularly want to live either." },
+    ],
+  },
+];
+
 
 
 const getCharacterImage = (selectedCharacter) => {
@@ -116,6 +149,8 @@ const getCharacterDialogue = (selectedCharacter) => {
       return flickDialogue;
     case 'muffy':
       return muffyDialogue;
+    case 'cap':
+      return capDialogue;
     default:
       return [];
   }
@@ -127,12 +162,14 @@ const getCharacterQuestions = (selectedCharacter) => {
       return flickQuestions;
     case 'muffy':
       return muffyQuestions;
+    case 'cap':
+      return capQuestions;
     default:
       return [];
   }
 };
 
-const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
+const CheckupGame = ({ selectedCharacter, onBack, onStartXray, backgroundImage }) => {
   const [showTextbox, setShowTextbox] = useState(false);
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const [showQuestions, setShowQuestions] = useState(false);
@@ -201,7 +238,7 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
 
   return (
     <div className="checkup-game">
-      <div className="checkup-background">
+      <div className="checkup-background" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <img 
           src={getCharacterImage(selectedCharacter)} 
           alt={selectedCharacter} 
@@ -248,7 +285,9 @@ const CheckupGame = ({ selectedCharacter, onBack, onStartXray }) => {
                 ))}
                 {askedQuestions.length === characterQuestions.length && (
                   <div className="diagnosis-section">
-                    <div className="all-asked">That's everything. Start the scan.</div>
+                  <div className="all-asked">
+                    {selectedCharacter === 'cap' ? "That was bleak. Start the scan." : "That's everything. Start the scan."}
+                  </div>
                   </div>
                 )}
               </div>
