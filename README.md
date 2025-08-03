@@ -11,4 +11,4 @@ Disclaimers:
 
 <br>I'd like to go back to the game at a later date to fix some things up and properly annotate/organize the code. But for now, I'm quite happy with the half-baked silly state it is currently in.
 
-<br>Major thank you / shout out / credit to Josh for composing the music!
+<br>Major thank you / shout out / credit to [Josh Murphy](https://github.com/ranguli) for composing the music!
