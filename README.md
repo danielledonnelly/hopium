@@ -1,7 +1,7 @@
 # Hopium Hospital
 
 ## Overview + Rambles
-This is my gamejam entry for Hopejam. It is a cutesy, comedic, cozy game where you work as a doctor at Hopium Hospital. You interview patients, scan them with an X-ray to see what's going on in their brains, diagnose them, and help them find hope to overcome their afflictions.
+This is my gamejam entry for Hopejam. It is a cutesy comedic cozy game where you work as a doctor at Hopium Hospital. You interview patients, scan them with an X-ray to see what's going on in their brains, diagnose them, and help them find hope to overcome their afflictions.
 <br>Most of my games have been linear and restrictive with what you can do, but this one is more open. While it makes most sense if played chronologically from beginning to end, you can easily choose how to play and which content you wish to prioritize or skip. 
 <br>In typical Dani game fashion (see [Spooky Potion Shop](https://github.com/danielledonnelly/spooky-potion-shop)), Hopium Hospital features 2D layered assets designed in Canva + some drag and drop brewing mechanics.
 
