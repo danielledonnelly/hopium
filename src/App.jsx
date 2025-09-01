@@ -14,19 +14,46 @@ function App() {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // Initialize audio
-    audioRef.current = new Audio('/assets/Hopejam OST 2 - Joshua Murphy.wav');
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.2; // Set volume to 20%
-    // Auto-play music when component mounts
-    const playMusic = async () => {
+    const audio = new Audio('/assets/Hopejam OST 2 - Joshua Murphy.wav');
+    audio.loop = true;
+    audio.volume = 0.2;
+    audioRef.current = audio;
+
+    const tryPlayAudio = async () => {
+      if (!audioRef.current) return;
       try {
         await audioRef.current.play();
+        removeInteractionListeners();
       } catch (error) {
-        console.log('Auto-play prevented by browser. User must interact first.');
+        // Autoplay blocked; wait for a user interaction
       }
     };
-    playMusic();
+
+    const handleFirstInteraction = () => {
+      void tryPlayAudio();
+    };
+
+    const interactionEvents = ['pointerdown', 'click', 'touchstart', 'keydown'];
+    const addInteractionListeners = () => {
+      interactionEvents.forEach((eventName) => {
+        window.addEventListener(eventName, handleFirstInteraction, { once: true });
+      });
+    };
+    const removeInteractionListeners = () => {
+      interactionEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, handleFirstInteraction);
+      });
+    };
+
+    addInteractionListeners();
+    void tryPlayAudio();
+
+    return () => {
+      removeInteractionListeners();
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, []);
 
   const handleCharacterSelect = (character) => {
